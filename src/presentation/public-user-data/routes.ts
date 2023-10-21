@@ -1,0 +1,21 @@
+import { Router } from 'express';
+import { PublicUserDataDataSourceImpl, PublicUserDataRepositoryImpl } from '../../infrastructure';
+import { PublicUserDataController } from './controller';
+
+export class PublicUserDataRoutes {
+  static get getRoutes(): Router {
+    const router = Router();
+
+    const dataSource = new PublicUserDataDataSourceImpl();
+    const publicUserDataRepository = new PublicUserDataRepositoryImpl(dataSource);
+    const controller = new PublicUserDataController(publicUserDataRepository);
+
+    // routes
+    router.post('/create', controller.createPublicUserData);
+    router.put('/update/:id', controller.updatePublicUserData);
+    router.get('/get/:id', controller.getPublicUserData);
+    router.delete('/delete/:id', controller.deletePublicUserData);
+
+    return router;
+  }
+}

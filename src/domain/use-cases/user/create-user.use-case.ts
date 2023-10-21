@@ -1,0 +1,16 @@
+import { CreateUserDto } from '../../dtos';
+import { User } from '../../entities';
+import { UserRepository } from '../../repositories';
+
+interface CreateUserUseCase {
+  execute(createUserDto: CreateUserDto): Promise<{ user: User; password: string }>;
+}
+
+export class CreateUser implements CreateUserUseCase {
+  constructor(private readonly userRepository: UserRepository) {}
+
+  async execute(createUserDto: CreateUserDto): Promise<{ user: User; password: string }> {
+    const data = await this.userRepository.create(createUserDto);
+    return data;
+  }
+}

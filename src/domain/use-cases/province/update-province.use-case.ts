@@ -1,0 +1,16 @@
+import { UpdateProvinceDto } from '../../dtos';
+import { Province } from '../../entities';
+import { ProvincesRepository } from '../../repositories';
+
+interface UpdateProvinceUseCase {
+  execute(updateProvinceDto: UpdateProvinceDto): Promise<Province>;
+}
+
+export class UpdateProvince implements UpdateProvinceUseCase {
+  constructor(private readonly provincesRepository: ProvincesRepository) {}
+
+  async execute(updateProvinceDto: UpdateProvinceDto): Promise<Province> {
+    const createdProvince = await this.provincesRepository.update(updateProvinceDto);
+    return createdProvince;
+  }
+}
