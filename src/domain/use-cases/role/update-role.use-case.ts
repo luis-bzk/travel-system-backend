@@ -10,8 +10,6 @@ export class UpdateRole implements UpdateRoleUseCase {
   constructor(private readonly roleRepository: RoleRepository) {}
 
   async execute(updateRoleDto: UpdateRoleDto): Promise<Role> {
-    const role = await this.roleRepository.update(updateRoleDto);
-
-    return role;
+    return await this.roleRepository.update(updateRoleDto);
   }
 }

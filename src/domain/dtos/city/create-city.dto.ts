@@ -8,7 +8,7 @@ export class CreateCityDto {
 
     if (!name) return ['El nombre del país es requerido'];
     if (!id_province) return ['El ID de la provincia requerido'];
-    if (!isValidObjectId(id_province)) return ['El ID de la provincia no es valido'];
+    if (!isValidObjectId(id_province)) return ['El ID de la provincia no es válido'];
 
     return [undefined, new CreateCityDto(name, id_province)];
   }

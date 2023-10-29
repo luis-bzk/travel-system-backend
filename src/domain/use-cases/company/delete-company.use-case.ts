@@ -9,7 +9,6 @@ export class DeleteCompany implements DeleteCompanyUseCase {
   constructor(private readonly companyRepository: CompanyRepository) {}
 
   async execute(deleteCompanyDto: DeleteCompanyDto): Promise<{}> {
-    const company = await this.companyRepository.delete(deleteCompanyDto);
-    return company;
+    return await this.companyRepository.delete(deleteCompanyDto);
   }
 }

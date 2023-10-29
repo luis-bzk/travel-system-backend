@@ -5,7 +5,7 @@ export class DeleteCityDto {
 
   static create(id: string): [string?, DeleteCityDto?] {
     if (!id) return ['El ID de la ciudad es requerido'];
-    if (!isValidObjectId(id)) return ['El ID de la ciudad no es valido'];
+    if (!isValidObjectId(id)) return ['El ID de la ciudad no es válido'];
 
     return [undefined, new DeleteCityDto(id)];
   }

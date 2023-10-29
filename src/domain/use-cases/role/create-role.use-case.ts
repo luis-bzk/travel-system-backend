@@ -10,8 +10,6 @@ export class CreateRole implements CreateRoleUseCase {
   constructor(private readonly roleRepository: RoleRepository) {}
 
   async execute(createRoleDto: CreateRoleDto): Promise<Role> {
-    const role = await this.roleRepository.create(createRoleDto);
-
-    return role;
+    return await this.roleRepository.create(createRoleDto);
   }
 }

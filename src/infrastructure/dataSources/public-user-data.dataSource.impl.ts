@@ -1,7 +1,7 @@
 import { CustomError } from '../../domain/errors';
 import { PublicUserDataMapper } from '../mappers';
 import { PublicUserData } from '../../domain/entities';
-import { PublicUserDataModel, UserModel } from '../../data';
+import { AddressModel, PublicUserDataModel, UserModel } from '../../data';
 import { PublicUserDataDataSource } from '../../domain/dataSources';
 import {
   CreatePublicUserDataDto,
@@ -22,10 +22,11 @@ export class PublicUserDataDataSourceImpl implements PublicUserDataDataSource {
       if (exists) throw CustomError.badRequest('Ya existe un usuario con esa identificación.');
 
       const user = await UserModel.findById(id_user);
-      if (!user) throw CustomError.notFound('El usuario no se encuentra registrado.');
-      //TODO: Validar con el modelo de Address
-      // const address = await AddressModel.findById(id_user);
-      // if(!address) throw CustomError.badRequest('La dirección no se encuentra registrado.')
+      if (!user) throw CustomError.notFound('El usuario no se encuentra registrado en el sistema.');
+
+      const address = await AddressModel.findById(id_address).lean();
+      if (!address) throw CustomError.notFound('La dirección no se encuentra registrada en el sistema.');
+
       const publicUserData = await PublicUserDataModel.create({
         identification,
         id_user,

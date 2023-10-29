@@ -10,7 +10,6 @@ export class UpdateUser implements UpdateUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(updateUserDto: UpdateUserDto): Promise<User> {
-    const updateUser = await this.userRepository.update(updateUserDto);
-    return updateUser;
+    return await this.userRepository.update(updateUserDto);
   }
 }

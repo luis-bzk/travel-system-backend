@@ -10,7 +10,6 @@ export class UpdatePublicUserData implements UpdatePublicUserDataUseCase {
   constructor(private readonly publicUserDataRepository: PublicUserDataRepository) {}
 
   async execute(updatePublicUserDataDto: UpdatePublicUserDataDto): Promise<PublicUserData> {
-    const createdPublicUserData = await this.publicUserDataRepository.update(updatePublicUserDataDto);
-    return createdPublicUserData;
+    return await this.publicUserDataRepository.update(updatePublicUserDataDto);
   }
 }

@@ -9,7 +9,6 @@ export class GetAllUsers implements GetAllUsersUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(): Promise<User[]> {
-    const users = await this.userRepository.getAll();
-    return users;
+    return await this.userRepository.getAll();
   }
 }

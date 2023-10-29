@@ -9,8 +9,6 @@ export class GetAllCountries implements GetAllCountriesUseCase {
   constructor(private readonly countryRepository: CountryRepository) {}
 
   async execute(): Promise<Country[]> {
-    const countries = await this.countryRepository.getAll();
-
-    return countries;
+    return await this.countryRepository.getAll();
   }
 }

@@ -10,7 +10,6 @@ export class CreatePublicUserData implements CreatePublicUserDataUseCase {
   constructor(private readonly publicUserDataRepository: PublicUserDataRepository) {}
 
   async execute(createPublicUserDataDto: CreatePublicUserDataDto): Promise<PublicUserData> {
-    const createdPublicUserData = await this.publicUserDataRepository.create(createPublicUserDataDto);
-    return createdPublicUserData;
+    return await this.publicUserDataRepository.create(createPublicUserDataDto);
   }
 }

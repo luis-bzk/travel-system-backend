@@ -10,7 +10,6 @@ export class ConfirmUser implements ConfirmUserUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
 
   async execute(confirmUserDto: ConfirmUserDto): Promise<User> {
-    const confirmUser = await this.authRepository.confirm(confirmUserDto);
-    return confirmUser;
+    return await this.authRepository.confirm(confirmUserDto);
   }
 }

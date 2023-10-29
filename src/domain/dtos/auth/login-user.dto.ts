@@ -10,7 +10,7 @@ export class LoginUserDto {
 
     // make validation
     if (!email) return ['El email del usuario es requerido'];
-    if (!Validators.email.test(email)) return ['El email no es valido'];
+    if (!Validators.email.test(email)) return ['El email no es válido'];
     if (!password) return ['La contraseña del usuario es requerido'];
 
     return [undefined, new LoginUserDto(email, password)];

@@ -10,8 +10,8 @@ export class CreateProvinceDto {
 
     // make validation
     if (!name) return ['El nombre del rol es requerido'];
-    if (!id_country) return ['El id del país es requerido'];
-    if (!isValidObjectId(id_country)) return ['El id del país no es valido'];
+    if (!id_country) return ['El ID del país es requerido'];
+    if (!isValidObjectId(id_country)) return ['El ID del país no es válido'];
 
     return [undefined, new CreateProvinceDto(name, id_country)];
   }

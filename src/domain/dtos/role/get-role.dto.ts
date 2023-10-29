@@ -7,7 +7,7 @@ export class GetRoleDto {
 
   static create(id: string): [string?, GetRoleDto?] {
     // make validation
-    if (!isValidObjectId(id)) return ['El id del rol no es valido'];
+    if (!isValidObjectId(id)) return ['El ID del rol no es válido'];
 
     return [undefined, new GetRoleDto(id)];
   }

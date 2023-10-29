@@ -9,7 +9,7 @@ export class CreateUserDto {
     if (!name) return ['El nombre del usuario es requerido.'];
     if (!lastName) return ['El apellido del usuario es requerido.'];
     if (!email) return ['El email del usuario es requerido'];
-    if (!Validators.email.test(email)) return ['El email ingresado no es valido'];
+    if (!Validators.email.test(email)) return ['El email ingresado no es válido'];
 
     return [undefined, new CreateUserDto(name, lastName, email)];
   }

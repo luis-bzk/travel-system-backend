@@ -10,7 +10,6 @@ export class GetUser implements GetUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(getUserDto: GetUserDto): Promise<User> {
-    const user = await this.userRepository.get(getUserDto);
-    return user;
+    return await this.userRepository.get(getUserDto);
   }
 }

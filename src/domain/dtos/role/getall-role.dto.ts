@@ -7,7 +7,7 @@ export class GetAllRoleDto {
 
   static create(id: string): [string?, GetAllRoleDto?] {
     // make validation
-    if (!isValidObjectId(id)) return ['El id del rol no es valido'];
+    if (!isValidObjectId(id)) return ['El ID del rol no es válido'];
 
     return [undefined, new GetAllRoleDto(id)];
   }

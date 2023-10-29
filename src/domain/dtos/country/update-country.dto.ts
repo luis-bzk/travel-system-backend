@@ -7,7 +7,7 @@ export class UpdateCountryDto {
     const { name, code, prefix } = object;
 
     // make validation
-    if (!isValidObjectId(id)) return ['El id del rol no es valido'];
+    if (!isValidObjectId(id)) return ['El ID del rol no es válido'];
     if (!name) return ['El nombre del país es requerido'];
     if (!code) return ['El código de país es requerido'];
     if (!prefix) return ['El prefijo del país es requerido'];

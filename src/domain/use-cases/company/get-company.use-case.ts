@@ -10,7 +10,6 @@ export class GetCompany implements GetCompanyUseCase {
   constructor(private readonly companyRepository: CompanyRepository) {}
 
   async execute(getCompanyDto: GetCompanyDto): Promise<Company> {
-    const company = await this.companyRepository.get(getCompanyDto);
-    return company;
+    return await this.companyRepository.get(getCompanyDto);
   }
 }

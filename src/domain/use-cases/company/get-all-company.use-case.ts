@@ -9,7 +9,6 @@ export class GetAllCompanies implements GetAllCompanyUseCase {
   constructor(private readonly companyRepository: CompanyRepository) {}
 
   async execute(): Promise<Company[]> {
-    const companies = await this.companyRepository.getAll();
-    return companies;
+    return await this.companyRepository.getAll();
   }
 }

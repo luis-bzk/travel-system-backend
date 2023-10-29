@@ -5,7 +5,7 @@ export class DeletePublicUserDataDto {
 
   static create(id: string): [string?, DeletePublicUserDataDto?] {
     // make validation
-    if (!isValidObjectId(id)) return ['El id de la información del usuario público no es valido'];
+    if (!isValidObjectId(id)) return ['El ID de la información del usuario público no es válido'];
     return [undefined, new DeletePublicUserDataDto(id)];
   }
 }

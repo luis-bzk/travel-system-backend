@@ -10,8 +10,6 @@ export class GetPublicUserData implements GetPublicUserDataUseCase {
   constructor(private readonly publicUserDataRepository: PublicUserDataRepository) {}
 
   async execute(getPublicUserDataDto: GetPublicUserDataDto): Promise<PublicUserData> {
-    const publicUserData = await this.publicUserDataRepository.get(getPublicUserDataDto);
-
-    return publicUserData;
+    return await this.publicUserDataRepository.get(getPublicUserDataDto);
   }
 }

@@ -10,7 +10,6 @@ export class UpdateProvince implements UpdateProvinceUseCase {
   constructor(private readonly provincesRepository: ProvincesRepository) {}
 
   async execute(updateProvinceDto: UpdateProvinceDto): Promise<Province> {
-    const createdProvince = await this.provincesRepository.update(updateProvinceDto);
-    return createdProvince;
+    return await this.provincesRepository.update(updateProvinceDto);
   }
 }

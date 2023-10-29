@@ -1,7 +1,7 @@
 import { Address } from '../../domain/entities';
 import { AddressDataSource } from '../../domain/dataSources';
 import { AddressRepository } from '../../domain/repositories';
-import { CreateAddressDto, UpdateAddressDto } from '../../domain/dtos';
+import { CreateAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressRepositoryImpl implements AddressRepository {
   constructor(private readonly addressDataSource: AddressDataSource) {}
@@ -11,5 +11,8 @@ export class AddressRepositoryImpl implements AddressRepository {
   }
   update(updateAddressDto: UpdateAddressDto): Promise<Address> {
     return this.addressDataSource.update(updateAddressDto);
+  }
+  get(getAddressDto: GetAddressDto): Promise<Address> {
+    return this.addressDataSource.get(getAddressDto);
   }
 }

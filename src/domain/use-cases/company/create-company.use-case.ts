@@ -10,7 +10,6 @@ export class CreateCompany implements CreateCompanyUseCase {
   constructor(private readonly companyRepository: CompanyRepository) {}
 
   async execute(createCompanyDto: CreateCompanyDto): Promise<Company> {
-    const company = await this.companyRepository.create(createCompanyDto);
-    return company;
+    return await this.companyRepository.create(createCompanyDto);
   }
 }

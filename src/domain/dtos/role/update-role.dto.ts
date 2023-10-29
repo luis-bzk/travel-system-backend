@@ -12,9 +12,9 @@ export class UpdateRoleDto {
     const validRoles: IRole[] = ['DEVELOPER', 'SUPER_ADMIN', 'ADMIN', 'PUBLIC', 'AFFILIATE'];
 
     // make validation
-    if (!isValidObjectId(id)) return ['El id del rol no es valido'];
+    if (!isValidObjectId(id)) return ['El ID del rol no es válido'];
     if (!name) return ['El nombre del rol es requerido'];
-    if (!validRoles.includes(name)) return ['El nombre del rol no es valido'];
+    if (!validRoles.includes(name)) return ['El nombre del rol no es válido'];
 
     return [undefined, new UpdateRoleDto(name, id)];
   }

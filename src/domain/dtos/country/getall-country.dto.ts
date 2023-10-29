@@ -5,7 +5,7 @@ export class GetAllCountryDto {
 
   static create(id: string): [string?, GetAllCountryDto?] {
     // make validation
-    if (!isValidObjectId(id)) return ['El id del país no es valido'];
+    if (!isValidObjectId(id)) return ['El ID del país no es válido'];
 
     return [undefined, new GetAllCountryDto(id)];
   }

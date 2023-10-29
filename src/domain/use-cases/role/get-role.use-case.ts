@@ -10,8 +10,6 @@ export class GetRole implements GetRoleUseCase {
   constructor(private readonly roleRepository: RoleRepository) {}
 
   async execute(getRoleDto: GetRoleDto): Promise<Role> {
-    const role = await this.roleRepository.get(getRoleDto);
-
-    return role;
+    return await this.roleRepository.get(getRoleDto);
   }
 }

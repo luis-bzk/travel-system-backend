@@ -7,10 +7,10 @@ export class UpdateCityDto {
     const { name, id_province } = object;
 
     if (!id) return ['El ID de la ciudad es requerido'];
-    if (!isValidObjectId(id)) return ['El ID de la ciudad no es valido'];
+    if (!isValidObjectId(id)) return ['El ID de la ciudad no es válido'];
     if (!name) return ['El nombre del país es requerido'];
     if (!id_province) return ['El ID de la provincia requerido'];
-    if (!isValidObjectId(id_province)) return ['El ID de la provincia no es valido'];
+    if (!isValidObjectId(id_province)) return ['El ID de la provincia no es válido'];
 
     return [undefined, new UpdateCityDto(id, name, id_province)];
   }

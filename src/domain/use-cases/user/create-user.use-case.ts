@@ -10,7 +10,6 @@ export class CreateUser implements CreateUserUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(createUserDto: CreateUserDto): Promise<{ user: User; password: string }> {
-    const data = await this.userRepository.create(createUserDto);
-    return data;
+    return await this.userRepository.create(createUserDto);
   }
 }

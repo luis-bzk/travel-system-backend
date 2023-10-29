@@ -11,7 +11,7 @@ export class CreateRoleDto {
 
     // make validation
     if (!name) return ['El nombre del rol es requerido'];
-    if (!validRoles.includes(name)) return ['El nombre del rol no es valido'];
+    if (!validRoles.includes(name)) return ['El nombre del rol no es válido'];
 
     return [undefined, new CreateRoleDto(name)];
   }

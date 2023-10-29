@@ -10,8 +10,6 @@ export class UpdateCountry implements UpdateCountryUseCase {
   constructor(private readonly countryRepository: CountryRepository) {}
 
   async execute(updateCountryDto: UpdateCountryDto): Promise<Country> {
-    const country = await this.countryRepository.update(updateCountryDto);
-
-    return country;
+    return await this.countryRepository.update(updateCountryDto);
   }
 }

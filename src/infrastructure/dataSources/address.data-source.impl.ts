@@ -3,7 +3,7 @@ import { AddressMapper } from '../mappers';
 import { Address } from '../../domain/entities';
 import { CustomError } from '../../domain/errors';
 import { AddressDataSource } from '../../domain/dataSources';
-import { CreateAddressDto, UpdateAddressDto } from '../../domain/dtos';
+import { CreateAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressDataSourceImpl implements AddressDataSource {
   constructor() {}
@@ -54,6 +54,24 @@ export class AddressDataSourceImpl implements AddressDataSource {
       if (error instanceof CustomError) {
         throw error;
       }
+      console.log(error);
+      throw CustomError.internalServer();
+    }
+  }
+
+  async get(getAddressDto: GetAddressDto): Promise<Address> {
+    const { id } = getAddressDto;
+
+    try {
+      const exists = await AddressModel.findById(id).lean();
+      if (!exists) throw CustomError.notFound('La dirección solicitada no se encuentra registrada en el sistema');
+
+      return AddressMapper.entityFromObject(exists);
+    } catch (error) {
+      if (error instanceof CustomError) {
+        throw error;
+      }
+
       console.log(error);
       throw CustomError.internalServer();
     }

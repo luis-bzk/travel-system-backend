@@ -10,8 +10,6 @@ export class CreateCountry implements CreateCountryUseCase {
   constructor(private readonly countryRepository: CountryRepository) {}
 
   async execute(createCountryDto: CreateCountryDto): Promise<Country> {
-    const country = await this.countryRepository.create(createCountryDto);
-
-    return country;
+    return await this.countryRepository.create(createCountryDto);
   }
 }

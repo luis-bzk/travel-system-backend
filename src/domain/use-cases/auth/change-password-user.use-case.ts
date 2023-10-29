@@ -9,7 +9,6 @@ export class ChangePasswordUser implements ChangePasswordUserUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
 
   async execute(changePasswordUserDto: ChangePasswordUserDto): Promise<{}> {
-    const updateUser = await this.authRepository.changePassword(changePasswordUserDto);
-    return updateUser;
+    return await this.authRepository.changePassword(changePasswordUserDto);
   }
 }

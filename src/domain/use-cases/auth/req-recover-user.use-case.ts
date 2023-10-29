@@ -10,8 +10,6 @@ export class ReqRecoverUser implements ReqRecoverUserUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
 
   async execute(reqRecoverUserDto: ReqRecoverUserDto): Promise<User> {
-    const user = await this.authRepository.reqRecover(reqRecoverUserDto);
-
-    return user;
+    return await this.authRepository.reqRecover(reqRecoverUserDto);
   }
 }

@@ -10,7 +10,6 @@ export class CheckTokenUser implements CheckTokenUserUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
 
   async execute(checkTokenUserDto: CheckTokenUserDto): Promise<User> {
-    const confirmUser = await this.authRepository.checkToken(checkTokenUserDto);
-    return confirmUser;
+    return await this.authRepository.checkToken(checkTokenUserDto);
   }
 }

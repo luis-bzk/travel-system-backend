@@ -9,11 +9,11 @@ export class UpdateProvinceDto {
     const { name, id_country } = object;
 
     // make validation
-    if (!id) return ['El id de la provincia es requerido'];
-    if (!isValidObjectId(id)) return ['El id de la provincia no es valido'];
+    if (!id) return ['El ID de la provincia es requerido'];
+    if (!isValidObjectId(id)) return ['El ID de la provincia no es válido'];
     if (!name) return ['El nombre del rol es requerido'];
-    if (!id_country) return ['El id del país es requerido'];
-    if (!isValidObjectId(id_country)) return ['El id del país no es valido'];
+    if (!id_country) return ['El ID del país es requerido'];
+    if (!isValidObjectId(id_country)) return ['El ID del país no es válido'];
 
     return [undefined, new UpdateProvinceDto(id, name, id_country)];
   }

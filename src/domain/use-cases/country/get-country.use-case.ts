@@ -10,8 +10,6 @@ export class GetCountry implements GetCountryUseCase {
   constructor(private readonly countryRepository: CountryRepository) {}
 
   async execute(getCountryDto: GetCountryDto): Promise<Country> {
-    const country = await this.countryRepository.get(getCountryDto);
-
-    return country;
+    return await this.countryRepository.get(getCountryDto);
   }
 }
