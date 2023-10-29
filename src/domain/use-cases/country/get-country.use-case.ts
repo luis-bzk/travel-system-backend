@@ -1,5 +1,5 @@
-import { GetCountryDto } from '../../dtos';
 import { Country } from '../../entities';
+import { GetCountryDto } from '../../dtos';
 import { CountryRepository } from '../../repositories';
 
 interface GetCountryUseCase {

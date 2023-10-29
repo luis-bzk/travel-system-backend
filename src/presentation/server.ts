@@ -6,6 +6,7 @@ interface Options {
   port?: number;
   routes: Router;
 }
+
 export class Server {
   public readonly app = express();
   private readonly port: number;
@@ -18,9 +19,6 @@ export class Server {
     this.routes = routes;
   }
 
-  /**
-   * Start server method
-   */
   public async start() {
     // middlewares
     this.app.use(express.json());

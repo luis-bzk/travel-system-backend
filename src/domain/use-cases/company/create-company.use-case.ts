@@ -1,5 +1,5 @@
-import { CreateCompanyDto } from '../../dtos';
 import { Company } from '../../entities';
+import { CreateCompanyDto } from '../../dtos';
 import { CompanyRepository } from '../../repositories';
 
 interface CreateCompanyUseCase {

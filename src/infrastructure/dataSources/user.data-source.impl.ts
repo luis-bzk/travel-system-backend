@@ -1,10 +1,11 @@
-import { BcryptAdapter } from '../../config';
-import { RoleModel, UserModel } from '../../data';
-import { CreateUserDto, DeleteUserDto, GetUserDto, UpdateUserDto, User } from '../../domain';
-import { UsersDataSource } from '../../domain/dataSources';
-import { CustomError } from '../../domain/errors';
-import { generatePassword, tokenGenerator } from '../../utils';
 import { UserMapper } from '../mappers';
+import { BcryptAdapter } from '../../config';
+import { User } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
+import { RoleModel, UserModel } from '../../data';
+import { UsersDataSource } from '../../domain/dataSources';
+import { generatePassword, tokenGenerator } from '../../utils';
+import { CreateUserDto, DeleteUserDto, GetUserDto, UpdateUserDto } from '../../domain/dtos';
 
 type HashFunction = (password: string) => string;
 

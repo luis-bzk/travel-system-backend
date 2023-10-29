@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { CreateUserDto, DeleteUserDto, GetUserDto, UpdateUserDto, UserRepository } from '../../domain';
 import { CustomError } from '../../domain/errors';
+import { UserRepository } from '../../domain/repositories';
+import { EmailGateway } from '../../infrastructure/gateways';
+import { CreateUserDto, DeleteUserDto, GetUserDto, UpdateUserDto } from '../../domain/dtos';
 import { CreateUser, DeleteUser, GetAllUsers, GetUser, UpdateUser } from '../../domain/use-cases';
-import { EmailGateway } from '../../infrastructure';
 
 export class UsersController {
   constructor(private readonly usersRepository: UserRepository) {}

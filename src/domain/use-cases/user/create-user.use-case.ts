@@ -1,5 +1,5 @@
-import { CreateUserDto } from '../../dtos';
 import { User } from '../../entities';
+import { CreateUserDto } from '../../dtos';
 import { UserRepository } from '../../repositories';
 
 interface CreateUserUseCase {

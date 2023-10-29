@@ -1,5 +1,5 @@
-import { ReqRecoverUserDto } from '../../dtos';
 import { User } from '../../entities';
+import { ReqRecoverUserDto } from '../../dtos';
 import { AuthRepository } from '../../repositories';
 
 interface ReqRecoverUserUseCase {

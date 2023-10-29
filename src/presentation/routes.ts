@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response, Router } from 'express';
+
 import { AuthRoutes } from './auth/routes';
 import { RolesRoutes } from './role/routes';
 import { UsersRoutes } from './user/routes';
 import { CountryRoutes } from './country/routes';
-import { ProvincesRoutes } from './province/routes';
-import { PublicUserDataRoutes } from './public-user-data/routes';
 import { CompanyRoutes } from './company/routes';
 import { AddressRoutes } from './address/routes';
+import { ProvincesRoutes } from './province/routes';
+import { PublicUserDataRoutes } from './public-user-data/routes';
 
 export class AppRoutes {
   static get routes(): Router {
@@ -18,7 +19,7 @@ export class AppRoutes {
     router.use('/api/roles', RolesRoutes.getRoutes);
     router.use('/api/countries', CountryRoutes.getRoutes);
     router.use('/api/provinces', ProvincesRoutes.getRoutes);
-    router.use('/api/publicuserdata', PublicUserDataRoutes.getRoutes);
+    router.use('/api/public-user-data', PublicUserDataRoutes.getRoutes);
     router.use('/api/companies', CompanyRoutes.getRoutes);
     router.use('/api/address', AddressRoutes.getRoutes);
 

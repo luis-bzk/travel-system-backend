@@ -1,6 +1,6 @@
-import { UpdateUserDto, CreateUserDto, DeleteUserDto } from '../dtos';
 import { User } from '../entities';
 import { GetUserDto } from '../dtos/user/get-user.dto';
+import { UpdateUserDto, CreateUserDto, DeleteUserDto } from '../dtos';
 
 export abstract class UsersDataSource {
   abstract create(createUserDto: CreateUserDto): Promise<{ user: User; password: string }>;

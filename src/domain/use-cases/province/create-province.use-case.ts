@@ -1,5 +1,5 @@
-import { CreateProvinceDto } from '../../dtos';
 import { Province } from '../../entities';
+import { CreateProvinceDto } from '../../dtos';
 import { ProvincesRepository } from '../../repositories';
 
 interface CreateProvinceUseCase {

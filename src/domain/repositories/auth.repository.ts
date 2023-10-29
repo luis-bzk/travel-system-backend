@@ -1,3 +1,4 @@
+import { User } from '../entities';
 import {
   ChangePasswordUserDto,
   CheckTokenUserDto,
@@ -6,7 +7,6 @@ import {
   RegisterUserDto,
   ReqRecoverUserDto,
 } from '../dtos';
-import { User } from '../entities';
 
 export abstract class AuthRepository {
   abstract login(loginUserDto: LoginUserDto): Promise<User>;

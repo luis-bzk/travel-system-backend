@@ -1,5 +1,5 @@
-import { GetPublicUserDataDto } from '../../dtos';
 import { PublicUserData } from '../../entities';
+import { GetPublicUserDataDto } from '../../dtos';
 import { PublicUserDataRepository } from '../../repositories';
 
 interface GetPublicUserDataUseCase {

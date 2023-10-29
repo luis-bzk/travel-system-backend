@@ -1,7 +1,9 @@
 import { AddressModel } from '../../data';
-import { Address, AddressDataSource, CreateAddressDto, UpdateAddressDto } from '../../domain';
-import { CustomError } from '../../domain/errors';
 import { AddressMapper } from '../mappers';
+import { Address } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
+import { AddressDataSource } from '../../domain/dataSources';
+import { CreateAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressDataSourceImpl implements AddressDataSource {
   constructor() {}
@@ -19,7 +21,7 @@ export class AddressDataSourceImpl implements AddressDataSource {
         secondary_street,
       });
 
-      return AddressMapper.addressEntityFromObject(address);
+      return AddressMapper.entityFromObject(address);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -47,7 +49,7 @@ export class AddressDataSourceImpl implements AddressDataSource {
 
       const updated = await exists.save();
 
-      return AddressMapper.addressEntityFromObject(updated);
+      return AddressMapper.entityFromObject(updated);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;

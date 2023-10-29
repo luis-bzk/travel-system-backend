@@ -1,5 +1,10 @@
+import { UserMapper } from '../mappers';
 import { BcryptAdapter } from '../../config';
+import { tokenGenerator } from '../../utils';
+import { User } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
 import { RoleModel, UserModel } from '../../data';
+import { AuthDataSource } from '../../domain/dataSources';
 import {
   ChangePasswordUserDto,
   CheckTokenUserDto,
@@ -7,12 +12,7 @@ import {
   LoginUserDto,
   RegisterUserDto,
   ReqRecoverUserDto,
-  User,
-} from '../../domain';
-import { AuthDataSource } from '../../domain/dataSources';
-import { CustomError } from '../../domain/errors';
-import { tokenGenerator } from '../../utils';
-import { UserMapper } from '../mappers';
+} from '../../domain/dtos';
 
 type HashFunction = (password: string) => string;
 type CompareFunction = (password: string, hashed: string) => boolean;

@@ -1,6 +1,6 @@
-import { JwtAdapter } from '../../../config';
 import { LoginUserDto } from '../../dtos';
 import { CustomError } from '../../errors';
+import { JwtAdapter } from '../../../config';
 import { AuthRepository } from '../../repositories';
 
 interface UserToken {

@@ -1,21 +1,16 @@
-import { CountryModel, ProvinceModel } from '../../data';
-import {
-  CountriesDataSource,
-  Country,
-  CreateCountryDto,
-  DeleteCountryDto,
-  GetCountryDto,
-  UpdateCountryDto,
-} from '../../domain';
-import { CustomError } from '../../domain/errors';
 import { CountryMapper } from '../mappers';
+import { Country } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
+import { CountriesDataSource } from '../../domain/dataSources';
+import { CityModel, CountryModel, ProvinceModel } from '../../data';
+import { CreateCountryDto, DeleteCountryDto, GetCountryDto, UpdateCountryDto } from '../../domain/dtos';
 
 export class CountriesDataSourceImpl implements CountriesDataSource {
   async create(createCountryDto: CreateCountryDto): Promise<Country> {
     const { name, code, prefix } = createCountryDto;
     try {
       const exists = await CountryModel.findOne({ name });
-      if (exists) throw CustomError.badRequest('El país ya se encuentra registrado dentro del sistema');
+      if (exists) throw CustomError.badRequest('El país ya se encuentra registrado dentro del sistema.');
 
       const country = await CountryModel.create({
         name,
@@ -23,7 +18,7 @@ export class CountriesDataSourceImpl implements CountriesDataSource {
         prefix,
       });
 
-      return CountryMapper.countryEntityFromObject(country);
+      return CountryMapper.entityFromObject(country);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -37,7 +32,7 @@ export class CountriesDataSourceImpl implements CountriesDataSource {
 
     try {
       const exists = await CountryModel.findById(id);
-      if (!exists) throw CustomError.notFound('El país solicitado no se encuentra dentro del sistema');
+      if (!exists) throw CustomError.notFound('El país no se encuentra registrado en el sistema.');
 
       exists.set({
         name: name,
@@ -47,7 +42,7 @@ export class CountriesDataSourceImpl implements CountriesDataSource {
 
       const updated = await exists.save();
 
-      return CountryMapper.countryEntityFromObject(updated);
+      return CountryMapper.entityFromObject(updated);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -60,9 +55,9 @@ export class CountriesDataSourceImpl implements CountriesDataSource {
     const { id } = getCountryDto;
     try {
       const exists = await CountryModel.findById(id);
-      if (!exists) throw CustomError.notFound('El país solicitado no se encuentra dentro del sistema');
+      if (!exists) throw CustomError.notFound('El país no se encuentra registrado en el sistema.');
 
-      return CountryMapper.countryEntityFromObject(exists);
+      return CountryMapper.entityFromObject(exists);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -75,7 +70,7 @@ export class CountriesDataSourceImpl implements CountriesDataSource {
     try {
       const countries = await CountryModel.find();
 
-      return CountryMapper.countriesEntitiesFromObject(countries);
+      return CountryMapper.entitiesFromObject(countries);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -88,15 +83,22 @@ export class CountriesDataSourceImpl implements CountriesDataSource {
     const { id } = deleteCountryDto;
 
     try {
-      const provinces = await ProvinceModel.deleteMany({ id_country: id });
-      if (provinces.deletedCount === 0) {
-        throw CustomError.notFound('No se pudo eliminar la provincia.');
-      }
-      //TODO: Eliminar las ciudades por el id del pais
-      const deleteCountry = await CountryModel.deleteOne({ _id: id });
-      if (deleteCountry.deletedCount === 0) {
-        throw CustomError.notFound('No se pudo eliminar el pais.');
-      }
+      // find country
+      const exists = await CountryModel.findById(id).lean();
+      if (!exists) throw CustomError.notFound('El país no se encuentra registrado en el sistema.');
+
+      // find provinces
+      const provinces = await ProvinceModel.find({ id_country: id }).select('_id');
+
+      // delete cities
+      await CityModel.deleteMany({ id_province: { $in: provinces } });
+
+      // delete provinces
+      await ProvinceModel.deleteMany({ id_country: id });
+
+      // delete country
+      await CountryModel.deleteOne({ _id: id });
+
       return {};
     } catch (error) {
       if (error instanceof CustomError) {

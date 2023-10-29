@@ -1,8 +1,9 @@
 import { RoleModel } from '../../data';
-import { CreateRoleDto, DeleteRoleDto, GetRoleDto, Role, UpdateRoleDto } from '../../domain';
-import { RolesDataSource } from '../../domain/dataSources';
-import { CustomError } from '../../domain/errors';
 import { RoleMapper } from '../mappers';
+import { Role } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
+import { RolesDataSource } from '../../domain/dataSources';
+import { CreateRoleDto, DeleteRoleDto, GetRoleDto, UpdateRoleDto } from '../../domain/dtos';
 
 export class RolesDataSourceImpl implements RolesDataSource {
   async create(createRoleDto: CreateRoleDto): Promise<Role> {
@@ -16,7 +17,7 @@ export class RolesDataSourceImpl implements RolesDataSource {
         name,
       });
 
-      return RoleMapper.userEntityFromObject(role);
+      return RoleMapper.entityFromObject(role);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -38,7 +39,7 @@ export class RolesDataSourceImpl implements RolesDataSource {
 
       const updated = await exists.save();
 
-      return RoleMapper.userEntityFromObject(updated);
+      return RoleMapper.entityFromObject(updated);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -72,7 +73,7 @@ export class RolesDataSourceImpl implements RolesDataSource {
       const exists = await RoleModel.findById(id);
       if (!exists) throw CustomError.notFound('El rol solicitado no se encuentra dentro del sistema');
 
-      return RoleMapper.userEntityFromObject(exists);
+      return RoleMapper.entityFromObject(exists);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -85,7 +86,7 @@ export class RolesDataSourceImpl implements RolesDataSource {
     try {
       const roles = await RoleModel.find();
 
-      return RoleMapper.usersEntitiesFromObject(roles);
+      return RoleMapper.entitiesFromObject(roles);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;

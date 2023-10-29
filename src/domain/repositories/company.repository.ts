@@ -1,5 +1,5 @@
-import { CreateCompanyDto, DeleteCompanyDto, GetCompanyDto, UpdateCompanyDto } from '../dtos';
 import { Company } from '../entities';
+import { CreateCompanyDto, DeleteCompanyDto, GetCompanyDto, UpdateCompanyDto } from '../dtos';
 
 export abstract class CompanyRepository {
   abstract create(createCompanyDto: CreateCompanyDto): Promise<Company>;

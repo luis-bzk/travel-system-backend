@@ -1,17 +1,8 @@
 import { Request, Response } from 'express';
-import {
-  RoleRepository,
-  CreateRoleDto,
-  UpdateRoleDto, DeleteRoleDto,
-  GetRoleDto,
-} from '../../domain';
-import {
-  CreateRole,
-  GetAllRoles,
-  GetRole,
-  UpdateRole, DeleteRole,
-} from '../../domain/use-cases';
 import { CustomError } from '../../domain/errors';
+import { RoleRepository } from '../../domain/repositories';
+import { CreateRoleDto, DeleteRoleDto, GetRoleDto, UpdateRoleDto } from '../../domain/dtos';
+import { CreateRole, GetAllRoles, GetRole, UpdateRole, DeleteRole } from '../../domain/use-cases';
 
 export class RoleController {
   constructor(private readonly roleRepository: RoleRepository) {}
@@ -38,10 +29,7 @@ export class RoleController {
   };
 
   updateRole = (req: Request, res: Response) => {
-    const [error, updateRoleDto] = UpdateRoleDto.create(
-      req.body,
-      req.params.id
-    );
+    const [error, updateRoleDto] = UpdateRoleDto.create(req.body, req.params.id);
     if (error) return res.status(400).json({ error });
 
     new UpdateRole(this.roleRepository)

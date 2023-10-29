@@ -1,5 +1,10 @@
-import { CreatePublicUserDataDto, GetPublicUserDataDto, UpdatePublicUserDataDto, DeletePublicUserDataDto } from '../dtos';
 import { PublicUserData } from '../entities';
+import {
+  CreatePublicUserDataDto,
+  GetPublicUserDataDto,
+  UpdatePublicUserDataDto,
+  DeletePublicUserDataDto,
+} from '../dtos';
 
 export abstract class PublicUserDataRepository {
   abstract create(createPublicUserDataDto: CreatePublicUserDataDto): Promise<PublicUserData>;

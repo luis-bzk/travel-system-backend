@@ -1,15 +1,16 @@
+import { PublicUserData } from '../../domain/entities';
+import { PublicUserDataDataSource } from '../../domain/dataSources';
+import { PublicUserDataRepository } from '../../domain/repositories';
 import {
   CreatePublicUserDataDto,
   DeletePublicUserDataDto,
   GetPublicUserDataDto,
-  PublicUserData,
-  PublicUserDataDataSource,
-  PublicUserDataRepository,
   UpdatePublicUserDataDto,
-} from '../../domain';
+} from '../../domain/dtos';
 
 export class PublicUserDataRepositoryImpl implements PublicUserDataRepository {
   constructor(private readonly publicUserDataDataSource: PublicUserDataDataSource) {}
+
   create(createPublicUserDataDto: CreatePublicUserDataDto): Promise<PublicUserData> {
     return this.publicUserDataDataSource.create(createPublicUserDataDto);
   }

@@ -1,7 +1,7 @@
-import { isValidObjectId } from "mongoose";
+import { isValidObjectId } from 'mongoose';
 
 export class UpdateCountryDto {
-  constructor(public name: string, public code: string, public prefix: string, public id: string) { }
+  constructor(public name: string, public code: string, public prefix: string, public id: string) {}
 
   static create(object: { [key: string]: any }, id: string): [string?, UpdateCountryDto?] {
     const { name, code, prefix } = object;

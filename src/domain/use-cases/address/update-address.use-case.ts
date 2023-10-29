@@ -1,5 +1,5 @@
-import { UpdateAddressDto } from '../../dtos';
 import { Address } from '../../entities';
+import { UpdateAddressDto } from '../../dtos';
 import { AddressRepository } from '../../repositories';
 
 interface UpdateAddressUseCase {

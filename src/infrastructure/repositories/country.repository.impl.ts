@@ -1,15 +1,11 @@
-import {
-  CountriesDataSource,
-  Country,
-  CountryRepository,
-  CreateCountryDto,
-  DeleteCountryDto,
-  GetCountryDto,
-  UpdateCountryDto,
-} from '../../domain';
+import { Country } from '../../domain/entities';
+import { CountriesDataSource } from '../../domain/dataSources';
+import { CountryRepository } from '../../domain/repositories';
+import { CreateCountryDto, DeleteCountryDto, GetCountryDto, UpdateCountryDto } from '../../domain/dtos';
 
 export class CountryRepositoryImpl implements CountryRepository {
   constructor(private readonly countriesDataSource: CountriesDataSource) {}
+
   create(createCountryDto: CreateCountryDto): Promise<Country> {
     return this.countriesDataSource.create(createCountryDto);
   }

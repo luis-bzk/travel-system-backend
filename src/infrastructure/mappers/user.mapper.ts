@@ -1,4 +1,4 @@
-import { User } from '../../domain';
+import { User } from '../../domain/entities';
 import { CustomError } from '../../domain/errors';
 
 export class UserMapper {
@@ -12,7 +12,7 @@ export class UserMapper {
     if (!state) throw CustomError.badRequest('Falta el estado del usuario');
     if (!id_role) throw CustomError.badRequest('Falta el rol del usuario');
 
-    return new User(_id, name, lastName, email, state, token || '', id_role);
+    return new User({ id: _id, name, lastName, email, state, token: token || '', id_role });
   }
 
   static userEntitiesFromObject(objects: { [key: string]: any }[]) {

@@ -1,12 +1,7 @@
 import { Request, Response } from 'express';
-import {
-  CreateProvinceDto,
-  DeleteProvinceDto,
-  GetProvinceDto,
-  ProvincesRepository,
-  UpdateProvinceDto,
-} from '../../domain';
 import { CustomError } from '../../domain/errors';
+import { ProvincesRepository } from '../../domain/repositories';
+import { CreateProvinceDto, DeleteProvinceDto, GetProvinceDto, UpdateProvinceDto } from '../../domain/dtos';
 import { CreateProvince, DeleteProvince, GetAllProvinces, GetProvince, UpdateProvince } from '../../domain/use-cases';
 
 export class ProvincesController {

@@ -1,5 +1,5 @@
-import { GetRoleDto } from '../../dtos';
 import { Role } from '../../entities';
+import { GetRoleDto } from '../../dtos';
 import { RoleRepository } from '../../repositories';
 
 interface GetRoleUseCase {

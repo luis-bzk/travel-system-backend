@@ -1,3 +1,4 @@
+import { User } from '../entities';
 import {
   LoginUserDto,
   RegisterUserDto,
@@ -6,7 +7,6 @@ import {
   ConfirmUserDto,
   ChangePasswordUserDto,
 } from '../dtos';
-import { User } from '../entities';
 
 export abstract class AuthDataSource {
   abstract login(loginUserDto: LoginUserDto): Promise<User>;

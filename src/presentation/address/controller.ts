@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import { AddressRepository, CreateAddressDto, UpdateAddressDto } from '../../domain';
 import { CustomError } from '../../domain/errors';
+import { AddressRepository } from '../../domain/repositories';
 import { CreateAddress, UpdateAddress } from '../../domain/use-cases';
+import { CreateAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressController {
   constructor(private readonly addressRepository: AddressRepository) {}

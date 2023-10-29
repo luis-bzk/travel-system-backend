@@ -1,8 +1,9 @@
-import { CountryModel, ProvinceModel } from '../../data';
-import { CreateProvinceDto, DeleteProvinceDto, GetProvinceDto, Province, UpdateProvinceDto } from '../../domain';
-import { ProvincesDataSource } from '../../domain/dataSources';
-import { CustomError } from '../../domain/errors';
 import { ProvinceMapper } from '../mappers';
+import { Province } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
+import { ProvincesDataSource } from '../../domain/dataSources';
+import { CityModel, CountryModel, ProvinceModel } from '../../data';
+import { CreateProvinceDto, DeleteProvinceDto, GetProvinceDto, UpdateProvinceDto } from '../../domain/dtos';
 
 export class ProvincesDataSourceImpl implements ProvincesDataSource {
   constructor() {}
@@ -26,7 +27,7 @@ export class ProvincesDataSourceImpl implements ProvincesDataSource {
         id_country,
       });
 
-      return ProvinceMapper.provinceEntityFromObject(province);
+      return ProvinceMapper.entityFromObject(province);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -56,7 +57,7 @@ export class ProvincesDataSourceImpl implements ProvincesDataSource {
 
       const updated = await exists.save();
 
-      return ProvinceMapper.provinceEntityFromObject(updated);
+      return ProvinceMapper.entityFromObject(updated);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -73,7 +74,7 @@ export class ProvincesDataSourceImpl implements ProvincesDataSource {
         throw CustomError.notFound('La provincia no se encuentra registrada en el sistema.');
       }
 
-      return ProvinceMapper.provinceEntityFromObject(exists);
+      return ProvinceMapper.entityFromObject(exists);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -86,7 +87,7 @@ export class ProvincesDataSourceImpl implements ProvincesDataSource {
     try {
       const provinces = await ProvinceModel.find();
 
-      return ProvinceMapper.provincesEntitiesFromObject(provinces);
+      return ProvinceMapper.entitiesFromObject(provinces);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -98,17 +99,15 @@ export class ProvincesDataSourceImpl implements ProvincesDataSource {
   async delete(deleteProvinceDto: DeleteProvinceDto): Promise<{}> {
     const { id } = deleteProvinceDto;
     try {
-      const exists = await ProvinceModel.findById(id);
-      if (!exists) {
-        throw CustomError.badRequest('La provincia no se encuentra registrada en el sistema.');
-      }
+      // find country
+      const exists = await ProvinceModel.findById(id).lean();
+      if (!exists) throw CustomError.notFound('La provincia no se encuentra registrada en el sistema.');
 
-      // TODO: DELETE CITIES
+      // delete cities
+      await CityModel.deleteMany({ id_province: id });
 
-      const deleteRole = await ProvinceModel.deleteOne({ _id: id });
-      if (deleteRole.deletedCount === 0) {
-        throw CustomError.notFound('No se pudo eliminar la provincia.');
-      }
+      // delete provinces
+      await ProvinceModel.deleteOne({ _id: id });
 
       return {};
     } catch (error) {

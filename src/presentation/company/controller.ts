@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
-import { CompanyRepository, CreateCompanyDto, DeleteCompanyDto, GetCompanyDto, UpdateCompanyDto } from '../../domain';
 import { CustomError } from '../../domain/errors';
+import { CompanyRepository } from '../../domain/repositories';
+import { CreateCompanyDto, DeleteCompanyDto, GetCompanyDto, UpdateCompanyDto } from '../../domain/dtos';
 import { CreateCompany, DeleteCompany, GetAllCompanies, GetCompany, UpdateCompany } from '../../domain/use-cases';
+
 export class CompanyController {
   constructor(private readonly companyRepository: CompanyRepository) {}
 

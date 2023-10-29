@@ -1,14 +1,14 @@
+import { CustomError } from '../../domain/errors';
+import { PublicUserDataMapper } from '../mappers';
+import { PublicUserData } from '../../domain/entities';
 import { PublicUserDataModel, UserModel } from '../../data';
+import { PublicUserDataDataSource } from '../../domain/dataSources';
 import {
   CreatePublicUserDataDto,
   DeletePublicUserDataDto,
   GetPublicUserDataDto,
-  PublicUserData,
-  PublicUserDataDataSource,
   UpdatePublicUserDataDto,
-} from '../../domain';
-import { CustomError } from '../../domain/errors';
-import { PublicUserDataMapper } from '../mappers';
+} from '../../domain/dtos';
 
 export class PublicUserDataDataSourceImpl implements PublicUserDataDataSource {
   constructor() {}
@@ -33,7 +33,7 @@ export class PublicUserDataDataSourceImpl implements PublicUserDataDataSource {
         primary_phone,
         secondary_phone,
       });
-      return PublicUserDataMapper.publicDataSourceEntityFromObject(publicUserData);
+      return PublicUserDataMapper.entityFromObject(publicUserData);
     } catch (error) {
       console.log(error);
       if (error instanceof CustomError) {
@@ -70,7 +70,7 @@ export class PublicUserDataDataSourceImpl implements PublicUserDataDataSource {
 
       const updated = await exists.save();
 
-      return PublicUserDataMapper.publicDataSourceEntityFromObject(updated);
+      return PublicUserDataMapper.entityFromObject(updated);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -83,9 +83,10 @@ export class PublicUserDataDataSourceImpl implements PublicUserDataDataSource {
     const { id } = getPublicUserDataDto;
     try {
       const exists = await PublicUserDataModel.findById(id);
-      if (!exists) throw CustomError.notFound('La información del usuario público solicitado no se encuentra dentro del sistema');
+      if (!exists)
+        throw CustomError.notFound('La información del usuario público solicitado no se encuentra dentro del sistema');
 
-      return PublicUserDataMapper.publicDataSourceEntityFromObject(exists);
+      return PublicUserDataMapper.entityFromObject(exists);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;

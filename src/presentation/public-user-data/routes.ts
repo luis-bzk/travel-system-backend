@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { PublicUserDataDataSourceImpl, PublicUserDataRepositoryImpl } from '../../infrastructure';
 import { PublicUserDataController } from './controller';
+import { PublicUserDataDataSourceImpl, PublicUserDataRepositoryImpl } from '../../infrastructure';
 
 export class PublicUserDataRoutes {
   static get getRoutes(): Router {

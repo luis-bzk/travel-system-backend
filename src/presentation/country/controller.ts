@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { CountryRepository, CreateCountryDto, DeleteCountryDto, GetCountryDto, UpdateCountryDto } from '../../domain';
 import { CustomError } from '../../domain/errors';
+import { CountryRepository } from '../../domain/repositories';
+import { CreateCountryDto, DeleteCountryDto, GetCountryDto, UpdateCountryDto } from '../../domain/dtos';
 import { CreateCountry, DeleteCountry, GetAllCountries, GetCountry, UpdateCountry } from '../../domain/use-cases';
 
 export class CountryController {
   constructor(private readonly countryRepository: CountryRepository) {}
+
   private handleError = (error: unknown, res: Response) => {
     if (error instanceof CustomError) {
       return res.status(error.statusCode).json({ error: error.message });

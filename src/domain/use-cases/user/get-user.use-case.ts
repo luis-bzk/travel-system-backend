@@ -1,5 +1,5 @@
-import { GetUserDto } from '../../dtos';
 import { User } from '../../entities';
+import { GetUserDto } from '../../dtos';
 import { UserRepository } from '../../repositories';
 
 interface GetUserUseCase {

@@ -1,5 +1,5 @@
-import { ConfirmUserDto } from '../../dtos';
 import { User } from '../../entities';
+import { ConfirmUserDto } from '../../dtos';
 import { AuthRepository } from '../../repositories';
 
 interface ConfirmUserUseCase {

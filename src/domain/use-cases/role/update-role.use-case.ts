@@ -1,5 +1,5 @@
-import { UpdateRoleDto } from '../../dtos';
 import { Role } from '../../entities';
+import { UpdateRoleDto } from '../../dtos';
 import { RoleRepository } from '../../repositories';
 
 interface UpdateRoleUseCase {

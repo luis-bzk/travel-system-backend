@@ -1,12 +1,8 @@
 import { Request, Response } from 'express';
-import {
-  AuthRepository,
-  LoginUserDto,
-  RegisterUserDto,
-  ReqRecoverUserDto,
-  ChangePasswordUserDto,
-  CheckTokenUserDto,
-} from '../../domain';
+import { CustomError } from '../../domain/errors';
+import { AuthRepository } from '../../domain/repositories';
+import { EmailGateway } from '../../infrastructure/gateways';
+import { ConfirmUserDto } from '../../domain/dtos/auth/confirm-user.dto';
 import {
   LoginUser,
   RegisterUser,
@@ -15,9 +11,13 @@ import {
   ChangePasswordUser,
   CheckTokenUser,
 } from '../../domain/use-cases';
-import { CustomError } from '../../domain/errors';
-import { EmailGateway } from '../../infrastructure';
-import { ConfirmUserDto } from '../../domain/dtos/auth/confirm-user.dto';
+import {
+  ChangePasswordUserDto,
+  CheckTokenUserDto,
+  LoginUserDto,
+  RegisterUserDto,
+  ReqRecoverUserDto,
+} from '../../domain/dtos';
 
 export class AuthController {
   constructor(private readonly authRepository: AuthRepository) {}

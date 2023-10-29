@@ -1,5 +1,5 @@
-import { CheckTokenUserDto } from '../../dtos';
 import { User } from '../../entities';
+import { CheckTokenUserDto } from '../../dtos';
 import { AuthRepository } from '../../repositories';
 
 interface CheckTokenUserUseCase {

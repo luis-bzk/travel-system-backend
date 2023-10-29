@@ -1,14 +1,14 @@
+import { User } from '../../domain/entities';
+import { AuthDataSource } from '../../domain/dataSources';
+import { AuthRepository } from '../../domain/repositories';
 import {
-  AuthDataSource,
-  AuthRepository,
-  LoginUserDto,
-  ConfirmUserDto,
-  RegisterUserDto,
-  ReqRecoverUserDto,
-  User,
   ChangePasswordUserDto,
   CheckTokenUserDto,
-} from '../../domain';
+  ConfirmUserDto,
+  LoginUserDto,
+  RegisterUserDto,
+  ReqRecoverUserDto,
+} from '../../domain/dtos';
 
 export class AuthRepositoryImpl implements AuthRepository {
   constructor(private readonly authDataSource: AuthDataSource) {}

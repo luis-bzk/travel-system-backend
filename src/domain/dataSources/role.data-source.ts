@@ -1,5 +1,5 @@
-import { CreateRoleDto, GetRoleDto, UpdateRoleDto, DeleteRoleDto } from '../dtos';
 import { Role } from '../entities';
+import { CreateRoleDto, GetRoleDto, UpdateRoleDto, DeleteRoleDto } from '../dtos';
 
 export abstract class RolesDataSource {
   abstract create(createRoleDto: CreateRoleDto): Promise<Role>;

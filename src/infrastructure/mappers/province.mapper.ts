@@ -1,26 +1,18 @@
-import { Province } from '../../domain';
+import { Province } from '../../domain/entities';
 import { CustomError } from '../../domain/errors';
 
 export class ProvinceMapper {
-  static provinceEntityFromObject(object: { [key: string]: any }) {
+  static entityFromObject(object: { [key: string]: any }) {
     const { _id, name, id_country } = object;
 
     if (!_id) throw CustomError.badRequest('Falta el id de la provincia');
     if (!name) throw CustomError.badRequest('Falta el nombre de la provincia');
     if (!id_country) throw CustomError.badRequest('Falta el id del país');
 
-    return new Province(_id, name, id_country);
+    return new Province({ id: _id, id_country, name });
   }
 
-  static provincesEntitiesFromObject(objects: { [key: string]: any }[]) {
-    objects.forEach((province) => {
-      const { _id, name, id_country } = province;
-
-      if (!_id) throw CustomError.badRequest('Falta el id de la provincia');
-      if (!name) throw CustomError.badRequest('Falta el nombre de la provincia');
-      if (!id_country) throw CustomError.badRequest('Falta el id del país');
-    });
-
-    return objects.map((province) => new Province(province._id, province.name, province.id_country));
+  static entitiesFromObject(objects: { [key: string]: any }[]) {
+    return objects.map((province) => this.entityFromObject(province));
   }
 }

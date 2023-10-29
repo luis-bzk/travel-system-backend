@@ -1,5 +1,5 @@
-import { RegisterUserDto } from '../../dtos';
 import { User } from '../../entities';
+import { RegisterUserDto } from '../../dtos';
 import { AuthRepository } from '../../repositories';
 
 interface RegisterUserUseCase {

@@ -1,13 +1,18 @@
 import { Request, Response } from 'express';
+import { CustomError } from '../../domain/errors';
+import {
+  CreatePublicUserData,
+  DeletePublicUserData,
+  GetPublicUserData,
+  UpdatePublicUserData,
+} from '../../domain/use-cases';
+import { PublicUserDataRepository } from '../../domain/repositories';
 import {
   CreatePublicUserDataDto,
   DeletePublicUserDataDto,
   GetPublicUserDataDto,
-  PublicUserDataRepository,
   UpdatePublicUserDataDto,
-} from '../../domain';
-import { CustomError } from '../../domain/errors';
-import { CreatePublicUserData, DeletePublicUserData, GetPublicUserData, UpdatePublicUserData } from '../../domain/use-cases';
+} from '../../domain/dtos';
 
 export class PublicUserDataController {
   constructor(private readonly publicUserDataRepository: PublicUserDataRepository) {}

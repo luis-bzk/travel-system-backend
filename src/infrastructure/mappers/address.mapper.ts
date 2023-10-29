@@ -1,8 +1,8 @@
-import { Address } from '../../domain';
+import { Address } from '../../domain/entities';
 import { CustomError } from '../../domain/errors';
 
 export class AddressMapper {
-  static addressEntityFromObject(object: { [key: string]: any }) {
+  static entityFromObject(object: { [key: string]: any }) {
     const { _id, id_city, id_country, id_province, main_street, secondary_street, postal_code } = object;
 
     if (!_id) throw CustomError.badRequest('Falta el ID de la dirección');
@@ -12,6 +12,10 @@ export class AddressMapper {
     if (!main_street) throw CustomError.badRequest('Falta el nombre de la calle principal de la dirección');
     if (!postal_code) throw CustomError.badRequest('Falta el código postal de la dirección');
 
-    return new Address(_id, id_city, id_country, id_province, main_street, secondary_street, postal_code);
+    return new Address({ id: _id, id_city, id_country, id_province, main_street, secondary_street, postal_code });
+  }
+
+  static entitiesFromObject(objects: { [key: string]: any }[]) {
+    return objects.map((address) => this.entityFromObject(address));
   }
 }

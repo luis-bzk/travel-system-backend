@@ -1,5 +1,5 @@
-import { CreateProvinceDto, DeleteProvinceDto, GetProvinceDto, UpdateProvinceDto } from '../dtos';
 import { Province } from '../entities';
+import { CreateProvinceDto, DeleteProvinceDto, GetProvinceDto, UpdateProvinceDto } from '../dtos';
 
 export abstract class ProvincesDataSource {
   abstract create(createProvinceDto: CreateProvinceDto): Promise<Province>;

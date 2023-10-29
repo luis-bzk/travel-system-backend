@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { RoleRepositoryImpl, RolesDataSourceImpl } from '../../infrastructure';
 import { RoleController } from './controller';
+import { RolesDataSourceImpl } from '../../infrastructure/dataSources';
+import { RoleRepositoryImpl } from '../../infrastructure/repositories';
 
 export class RolesRoutes {
   static get getRoutes(): Router {
@@ -8,7 +9,6 @@ export class RolesRoutes {
 
     const dataSource = new RolesDataSourceImpl();
     const roleRepository = new RoleRepositoryImpl(dataSource);
-
     const controller = new RoleController(roleRepository);
 
     // routes

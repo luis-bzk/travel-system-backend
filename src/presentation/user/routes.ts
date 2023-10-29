@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { UsersDataSourceImpl, UsersRepositoryImpl } from '../../infrastructure';
 import { UsersController } from './controller';
+import { UsersDataSourceImpl } from '../../infrastructure/dataSources';
+import { UsersRepositoryImpl } from '../../infrastructure/repositories';
 
 export class UsersRoutes {
   static get getRoutes(): Router {
@@ -8,7 +9,6 @@ export class UsersRoutes {
 
     const dataSource = new UsersDataSourceImpl();
     const userRepository = new UsersRepositoryImpl(dataSource);
-
     const controller = new UsersController(userRepository);
 
     // routes

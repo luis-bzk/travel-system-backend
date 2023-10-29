@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { AddressDataSourceImpl, AddressRepositoryImpl } from '../../infrastructure';
 import { AddressController } from './controller';
+import { AddressDataSourceImpl } from '../../infrastructure/dataSources';
+import { AddressRepositoryImpl } from '../../infrastructure/repositories';
 
 export class AddressRoutes {
   static get getRoutes(): Router {
@@ -8,7 +9,6 @@ export class AddressRoutes {
 
     const dataSource = new AddressDataSourceImpl();
     const addressRepository = new AddressRepositoryImpl(dataSource);
-
     const controller = new AddressController(addressRepository);
 
     // routes

@@ -1,3 +1,14 @@
+interface Entity {
+  id: string;
+  name: string;
+}
+
 export class Role {
-  constructor(public id: string, public name: string) {}
+  public id: string;
+  public name: string;
+
+  constructor(entity: Entity) {
+    this.id = entity.id;
+    this.name = entity.name;
+  }
 }

@@ -1,14 +1,9 @@
 import { CompanyModel } from '../../data';
-import {
-  CompanyDataSource,
-  Company,
-  CreateCompanyDto,
-  UpdateCompanyDto,
-  GetCompanyDto,
-  DeleteCompanyDto,
-} from '../../domain';
-import { CustomError } from '../../domain/errors';
 import { CompanyMapper } from '../mappers';
+import { Company } from '../../domain/entities';
+import { CustomError } from '../../domain/errors';
+import { CompanyDataSource } from '../../domain/dataSources';
+import { CreateCompanyDto, DeleteCompanyDto, GetCompanyDto, UpdateCompanyDto } from '../../domain/dtos';
 
 export class CompanyDataSourceImpl implements CompanyDataSource {
   constructor() {}
@@ -36,7 +31,7 @@ export class CompanyDataSourceImpl implements CompanyDataSource {
         schedule,
       });
 
-      return CompanyMapper.companyFromObject(company);
+      return CompanyMapper.entityFromObject(company);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -73,7 +68,7 @@ export class CompanyDataSourceImpl implements CompanyDataSource {
       });
 
       const updated = await exists.save();
-      return CompanyMapper.companyFromObject(updated);
+      return CompanyMapper.entityFromObject(updated);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -90,7 +85,7 @@ export class CompanyDataSourceImpl implements CompanyDataSource {
       const company = await CompanyModel.findById(id).lean();
       if (!company) throw CustomError.notFound('La compañía solicitada no se encuentra registrada en el sistema');
 
-      return CompanyMapper.companyFromObject(company);
+      return CompanyMapper.entityFromObject(company);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
@@ -104,7 +99,7 @@ export class CompanyDataSourceImpl implements CompanyDataSource {
     try {
       const companies = await CompanyModel.find().lean();
 
-      return CompanyMapper.companiesEntitiesFromObject(companies);
+      return CompanyMapper.entitiesFromObject(companies);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;

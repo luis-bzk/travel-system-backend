@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { AuthDataSourceImpl, AuthRepositoryImpl } from '../../infrastructure';
 import { AuthController } from './controller';
+import { AuthDataSourceImpl, AuthRepositoryImpl } from '../../infrastructure';
 
 export class AuthRoutes {
   static get getRoutes(): Router {
@@ -8,7 +8,6 @@ export class AuthRoutes {
 
     const dataSource = new AuthDataSourceImpl();
     const authRepository = new AuthRepositoryImpl(dataSource);
-
     const controller = new AuthController(authRepository);
 
     // routes
