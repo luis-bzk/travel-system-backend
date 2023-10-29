@@ -1,7 +1,7 @@
 import { Address } from '../../domain/entities';
 import { AddressDataSource } from '../../domain/dataSources';
 import { AddressRepository } from '../../domain/repositories';
-import { CreateAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
+import { CreateAddressDto, DeleteAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressRepositoryImpl implements AddressRepository {
   constructor(private readonly addressDataSource: AddressDataSource) {}
@@ -17,5 +17,8 @@ export class AddressRepositoryImpl implements AddressRepository {
   }
   getAll(): Promise<Address[]> {
     return this.addressDataSource.getAll();
+  }
+  delete(deleteAddressDto: DeleteAddressDto): Promise<{}> {
+    return this.delete(deleteAddressDto);
   }
 }

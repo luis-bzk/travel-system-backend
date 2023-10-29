@@ -3,7 +3,7 @@ import { AddressMapper } from '../mappers';
 import { Address } from '../../domain/entities';
 import { CustomError } from '../../domain/errors';
 import { AddressDataSource } from '../../domain/dataSources';
-import { CreateAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
+import { CreateAddressDto, DeleteAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressDataSourceImpl implements AddressDataSource {
   constructor() {}
@@ -81,6 +81,26 @@ export class AddressDataSourceImpl implements AddressDataSource {
     try {
       const addresses = await AddressModel.find().lean();
       return AddressMapper.entitiesFromObject(addresses);
+    } catch (error) {
+      if (error instanceof CustomError) {
+        throw error;
+      }
+
+      console.log(error);
+      throw CustomError.internalServer();
+    }
+  }
+
+  async delete(deleteAddressDto: DeleteAddressDto): Promise<{}> {
+    const { id } = deleteAddressDto;
+    try {
+      const exists = await AddressModel.findById(id);
+      if (!exists) throw CustomError.notFound('La dirección no se encuentra registrada en el sistema');
+
+      const deleted = await AddressModel.deleteOne({ _id: id });
+      if (deleted.deletedCount === 0) throw CustomError.notFound('No se ha podido eliminar la dirección solicitada');
+
+      return {};
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;

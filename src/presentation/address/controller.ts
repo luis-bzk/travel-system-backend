@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { CustomError } from '../../domain/errors';
 import { AddressRepository } from '../../domain/repositories';
-import { CreateAddress, GetAddress, GetAllAddresses, UpdateAddress } from '../../domain/use-cases';
-import { CreateAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
+import { CreateAddress, DeleteAddress, GetAddress, GetAllAddresses, UpdateAddress } from '../../domain/use-cases';
+import { CreateAddressDto, DeleteAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressController {
   constructor(private readonly addressRepository: AddressRepository) {}
@@ -50,6 +50,16 @@ export class AddressController {
     new GetAllAddresses(this.addressRepository)
       .execute()
       .then((data) => res.status(200).json(data))
+      .catch((error) => this.handleError(error, res));
+  };
+
+  deleteAddress = (req: Request, res: Response) => {
+    const [error, deleteAddressDto] = DeleteAddressDto.create(req.params.id);
+    if (error) return res.status(400).json({ error });
+
+    new DeleteAddress(this.addressRepository)
+      .execute(deleteAddressDto!)
+      .then((data) => res.status(204).json(data))
       .catch((error) => this.handleError(error, res));
   };
 }

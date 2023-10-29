@@ -16,6 +16,7 @@ export class AddressRoutes {
     router.put('/update/:id', controller.updateAddress);
     router.get('/get/:id', controller.getAddress);
     router.get('/get-all', controller.getAllAddresses);
+    router.delete('/delete/:id', controller.deleteAddress);
 
     return router;
   }
