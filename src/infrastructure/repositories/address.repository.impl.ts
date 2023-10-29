@@ -15,4 +15,7 @@ export class AddressRepositoryImpl implements AddressRepository {
   get(getAddressDto: GetAddressDto): Promise<Address> {
     return this.addressDataSource.get(getAddressDto);
   }
+  getAll(): Promise<Address[]> {
+    return this.addressDataSource.getAll();
+  }
 }

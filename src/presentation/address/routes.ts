@@ -15,6 +15,7 @@ export class AddressRoutes {
     router.post('/create', controller.createAddress);
     router.put('/update/:id', controller.updateAddress);
     router.get('/get/:id', controller.getAddress);
+    router.get('/get-all', controller.getAllAddresses);
 
     return router;
   }

@@ -76,4 +76,18 @@ export class AddressDataSourceImpl implements AddressDataSource {
       throw CustomError.internalServer();
     }
   }
+
+  async getAll(): Promise<Address[]> {
+    try {
+      const addresses = await AddressModel.find().lean();
+      return AddressMapper.entitiesFromObject(addresses);
+    } catch (error) {
+      if (error instanceof CustomError) {
+        throw error;
+      }
+
+      console.log(error);
+      throw CustomError.internalServer();
+    }
+  }
 }

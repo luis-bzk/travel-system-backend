@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CustomError } from '../../domain/errors';
 import { AddressRepository } from '../../domain/repositories';
-import { CreateAddress, GetAddress, UpdateAddress } from '../../domain/use-cases';
+import { CreateAddress, GetAddress, GetAllAddresses, UpdateAddress } from '../../domain/use-cases';
 import { CreateAddressDto, GetAddressDto, UpdateAddressDto } from '../../domain/dtos';
 
 export class AddressController {
@@ -42,6 +42,13 @@ export class AddressController {
 
     new GetAddress(this.addressRepository)
       .execute(getAddressDto!)
+      .then((data) => res.status(200).json(data))
+      .catch((error) => this.handleError(error, res));
+  };
+
+  getAllAddresses = (_req: Request, res: Response) => {
+    new GetAllAddresses(this.addressRepository)
+      .execute()
       .then((data) => res.status(200).json(data))
       .catch((error) => this.handleError(error, res));
   };
