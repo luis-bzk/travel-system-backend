@@ -23,7 +23,6 @@ const addressSchema = new Schema(
     },
     postal_code: {
       type: String,
-      required: [true, 'Postal code is required'],
     },
   },
   { timestamps: true }

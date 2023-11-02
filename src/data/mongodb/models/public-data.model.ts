@@ -1,35 +1,31 @@
 import mongoose, { Schema } from 'mongoose';
 
-
 const publicDataSchema = new Schema(
   {
     identification: {
       type: String,
-      required: [ true, ' Identification is required.'],
-      unique: true
+      required: [true, ' Identification is required.'],
+      unique: true,
     },
     primary_phone: {
       type: String,
-      required: [ true, ' Cellphone is required.'],
+      required: [true, ' Cellphone is required.'],
     },
     secondary_phone: {
-      type: String
+      type: String,
     },
     id_user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
     id_address: {
-      type: String
-    }
-    // id_address: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Adress'
-    // }
+      type: Schema.Types.ObjectId,
+      ref: 'Address',
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
-)
+);
 
-export const PublicUserDataModel = mongoose.model('PublicUserData', publicDataSchema, 'PublicUsersDatas' );
+export const PublicUserDataModel = mongoose.model('PublicUserData', publicDataSchema, 'publicUsersDatas');

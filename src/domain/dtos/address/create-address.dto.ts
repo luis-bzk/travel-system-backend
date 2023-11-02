@@ -11,7 +11,7 @@ export class CreateAddressDto {
   ) {}
 
   static create(object: { [key: string]: any }): [string?, CreateAddressDto?] {
-    const { id_city, id_province, id_country, main_street, secondary_street = '', postal_code } = object;
+    const { id_city, id_province, id_country, main_street, secondary_street = '', postal_code = '' } = object;
 
     if (!id_city) return ['El ID de la ciudad es requerido'];
     if (!isValidObjectId(id_city)) return ['El ID de la ciudad no tiene un formato válido'];

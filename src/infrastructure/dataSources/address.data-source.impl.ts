@@ -63,7 +63,11 @@ export class AddressDataSourceImpl implements AddressDataSource {
     const { id } = getAddressDto;
 
     try {
-      const exists = await AddressModel.findById(id).lean();
+      const exists = await AddressModel.findById(id)
+        .populate({ path: 'id_city', select: 'name' })
+        .populate({ path: 'id_province', select: 'name' })
+        .populate({ path: 'id_country', select: 'name' })
+        .lean();
       if (!exists) throw CustomError.notFound('La dirección solicitada no se encuentra registrada en el sistema');
 
       return AddressMapper.entityFromObject(exists);
@@ -79,7 +83,11 @@ export class AddressDataSourceImpl implements AddressDataSource {
 
   async getAll(): Promise<Address[]> {
     try {
-      const addresses = await AddressModel.find().lean();
+      const addresses = await AddressModel.find()
+        .populate({ path: 'id_city', select: 'name' })
+        .populate({ path: 'id_province', select: 'name' })
+        .populate({ path: 'id_country', select: 'name' })
+        .lean();
       return AddressMapper.entitiesFromObject(addresses);
     } catch (error) {
       if (error instanceof CustomError) {

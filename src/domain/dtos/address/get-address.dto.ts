@@ -5,7 +5,7 @@ export class GetAddressDto {
 
   static create(id: string): [string?, GetAddressDto?] {
     if (!id) return ['El ID de la dirección es requerido'];
-    if (!isValidObjectId(id)) ['El ID de la dirección no tiene un formato válido'];
+    if (!isValidObjectId(id)) return ['El ID de la dirección no tiene un formato válido'];
 
     return [undefined, new GetAddressDto(id)];
   }
