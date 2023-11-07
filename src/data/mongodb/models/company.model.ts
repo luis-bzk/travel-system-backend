@@ -11,6 +11,7 @@ const companySchema = new Schema(
     domain: { type: String, required: [true, 'Domain is required'] },
     schedule: { type: String, required: [true, 'Schedule is required'] },
     id_address: { type: Schema.Types.ObjectId, ref: 'Address' },
+    id_user: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );

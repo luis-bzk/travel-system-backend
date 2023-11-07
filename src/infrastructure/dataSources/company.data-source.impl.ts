@@ -9,12 +9,18 @@ export class CompanyDataSourceImpl implements CompanyDataSource {
   constructor() {}
 
   async create(createCompanyDto: CreateCompanyDto): Promise<Company> {
-    const { name, social_reason, email, RUC, phone, cellphone, id_address, domain, schedule } = createCompanyDto;
+    const { name, social_reason, email, RUC, phone, cellphone, id_address, domain, schedule, id_user } =
+      createCompanyDto;
 
     try {
       const exists = await CompanyModel.findOne({ RUC: RUC }).lean();
       if (exists) {
         throw CustomError.badRequest('La compañía ya se encuentra registrada dentro del sistema');
+      }
+
+      const previousRegistered = await CompanyModel.findOne({ id_user: id_user }).lean();
+      if (previousRegistered) {
+        throw CustomError.badRequest('El usuario ya posee una compañía registrada dentro del sistema');
       }
 
       // TODO: VERIFY ADDRESS EXISTS

@@ -9,6 +9,7 @@ interface Entity {
   id_address: string;
   domain: string;
   schedule: string;
+  id_user: string;
 }
 
 export class Company {
@@ -22,6 +23,7 @@ export class Company {
   public id_address: string;
   public domain: string;
   public schedule: string;
+  public id_user: string;
 
   constructor(entity: Entity) {
     this.id = entity.id;
@@ -34,5 +36,6 @@ export class Company {
     this.id_address = entity.id_address;
     this.domain = entity.domain;
     this.schedule = entity.schedule;
+    this.id_user = entity.id_user;
   }
 }
