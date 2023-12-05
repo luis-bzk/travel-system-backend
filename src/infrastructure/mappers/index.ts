@@ -6,3 +6,4 @@ export * from './city.mapper';
 export * from './public-data-source.mapper';
 export * from './company.mapper';
 export * from './address.mapper';
+export * from './category.mapper';

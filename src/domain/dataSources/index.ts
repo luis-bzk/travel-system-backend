@@ -7,3 +7,4 @@ export * from './city.data-source';
 export * from './public-user-data.dataSource';
 export * from './company.data-source';
 export * from './address.data-source';
+export * from './category.data-source';
